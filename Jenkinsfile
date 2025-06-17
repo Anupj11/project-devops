@@ -18,9 +18,17 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                script {
-                    sh 'docker run -d -p 8081:80 --name webapp devops-static-site || true'
-                }
+                stage('Run Docker Container') {
+    steps {
+        script {
+            sh '''
+            docker rm -f webapp || true
+            docker run -d -p 8081:80 --name webapp devops-static-site
+            '''
+        }
+    }
+}
+
             }
         }
 

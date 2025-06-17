@@ -1,6 +1,7 @@
+---
 - name: Configure Web Server
   hosts: webserver
-  become: true
-
-  roles:
-    - webserver
+  become: false
+  tasks:
+    - name: Ping test
+      ping:
