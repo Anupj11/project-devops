@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh '''
                 cd Ansible
-                ansible-playbook -i hosts playbook.yml
+                ansible-playbook -i Hosts playbook.yml
                 '''
             }
         }
