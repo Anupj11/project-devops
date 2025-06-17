@@ -1,7 +1,2 @@
-[webserver]
+[web]
 localhost ansible_connection=local
-
-# Example for remote EC2 servers (Uncomment and modify when using AWS)
-# [webserver]
-# 54.201.123.45 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
-# 54.203.12.34 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
