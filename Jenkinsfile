@@ -4,39 +4,30 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/Anupj11/project-devops.git'
+                git 'https://github.com/Anupj11/project-devops.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    sh 'docker build -t devops-static-site ./docker'
-                }
+                sh 'docker build -t devops-static-site ./docker'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                stage('Run Docker Container') {
-    steps {
-        script {
-            sh '''
-            docker rm -f webapp || true
-            docker run -d -p 8081:80 --name webapp devops-static-site
-            '''
-        }
-    }
-}
-
+                sh '''
+                    docker rm -f webapp || true
+                    docker run -d -p 8081:80 --name webapp devops-static-site
+                '''
             }
         }
 
         stage('Deploy via Ansible') {
             steps {
                 sh '''
-                cd Ansible
-                ansible-playbook -i Hosts playbook.yml
+                    cd Ansible
+                    ansible-playbook -i Hosts playbook.yml
                 '''
             }
         }
@@ -47,8 +38,7 @@ pipeline {
             echo 'Deployment successful!'
         }
         failure {
-            echo 'Deployment failed.'
+            echo 'Pipeline failed.'
         }
     }
 }
-
