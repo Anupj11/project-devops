@@ -5,7 +5,7 @@ FROM nginx:latest
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy the static website files into the container
-COPY ../app/index.html /usr/share/nginx/html/
+COPY index.html /usr/share/nginx/html/
 
 # Expose port 80 (Nginx default)
 EXPOSE 80
