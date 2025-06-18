@@ -3,17 +3,15 @@ pipeline {
 
     stages {
        stage('Clone Repository') {
-    steps {
+           steps {
         git 'https://github.com/Anupj11/project-devops.git'
     }
 }
 
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t devops-static-site ./docker'
-            }
+       stage('Build Docker Image') {
+           steps {
+               sh 'docker build -t devops-static-site ./docker'
+           }
         }
 
         stage('Run Docker Container') {
