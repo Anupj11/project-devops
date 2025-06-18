@@ -2,10 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/Anupj11/project-devops.git'
-            }
+       stage('Clone Repository') {
+    steps {
+        git 'https://github.com/Anupj11/project-devops.git'
+    }
+}
+
         }
 
         stage('Build Docker Image') {
@@ -15,13 +17,17 @@ pipeline {
         }
 
         stage('Run Docker Container') {
-            steps {
-                sh '''
-                    docker rm -f webapp || true
-                    docker run -d -p 8081:80 --name webapp devops-static-site
-                '''
-            }
+    steps {
+        script {
+            sh '''
+                docker stop webapp || true
+                docker rm webapp || true
+                docker run -d -p 8081:80 --name webapp devops-static-site
+            '''
         }
+    }
+}
+
 
         stage('Deploy via Ansible') {
             steps {
